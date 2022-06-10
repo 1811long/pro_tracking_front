@@ -10,10 +10,9 @@ export default function HomePage() {
         <Container  
             maxWidth="md"
             style={{
-                marginTop:"300px"
+                marginTop:""
             }}
         >
-
             <h1
                 style={{textAlign:'center'}}
             >
