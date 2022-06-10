@@ -5,19 +5,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-export default function ActionAreaCard(image, name) {
+export default function ActionAreaCard( {image, name} ) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} href={`/champion/${name}`}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
           image={image}
-          alt="champion image"
+          alt={name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {name}
+            
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+          {name}
           </Typography>
         </CardContent>
       </CardActionArea>
