@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ChampionPage from "./components/ChampionPage";
 import HomePage from "./components/HomePage";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <Route path="/about" element={<></>} />
         <Route path="/contact" />
         <Route path="/faq"  />
+        <Route path = "/champions" element={<ChampionPage/>}/> 
       </Routes>
   </Router>
   );
