@@ -43,6 +43,9 @@ export default function NavBar() {
             <Link to="/" className={classes.link}>
               Home
             </Link>
+            <Link to="/champions" className={classes.link}>
+              Champions
+            </Link>
             <Link to="/about" className={classes.link}>
               About
             </Link>
