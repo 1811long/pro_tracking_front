@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from './NavBar'
+import NavBar from './../components/NavBar'
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 
