@@ -39,19 +39,25 @@ export default function NavBar() {
         <Typography variant="h4" className={classes.logo}>
           Pro - Tracking
         </Typography>
+        
           <div className={classes.navlinks}>
+
             <Link to="/" className={classes.link}>
               Home
             </Link>
+
             <Link to="/champions" className={classes.link}>
               Champions
             </Link>
+
             <Link to="/about" className={classes.link}>
               About
             </Link>
+
             <Link to="/contact" className={classes.link}>
               Contact
             </Link>
+
             <Link to="/faq" className={classes.link}>
               FAQ
             </Link>

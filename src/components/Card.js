@@ -11,18 +11,19 @@ export default function ActionAreaCard( {image, name} ) {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="100"
           image={image}
           alt={name}
         />
+        
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            
           </Typography>
           <Typography variant="body2" color="text.secondary">
           {name}
           </Typography>
         </CardContent>
+
       </CardActionArea>
     </Card>
   );

@@ -4,12 +4,13 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import SummonerCard from '../components/SummonerCard';
+
 import APIController from '../APIController';
 
 
 export default function HomePage() {
   const [nameSummoner,setNameSummoner] = useState('')
-
   const [infoSummoner, setInfoSummoner] = useState()
 
   useEffect(() =>{
@@ -17,7 +18,6 @@ export default function HomePage() {
     APIController
             .getSummonerByName(nameSummoner)
             .then((res) => {
-                console.log(res)
                 setInfoSummoner(res)
             })
   }, [nameSummoner])
@@ -40,7 +40,6 @@ export default function HomePage() {
             >
                 Entrer le nom de l'invocateur
             </h1>
-
             <TextField
                 id="outlined-basic"
                 value={nameSummoner}
@@ -49,8 +48,9 @@ export default function HomePage() {
                 variant="outlined" 
                 fullWidth
             />
-        {JSON.stringify(infoSummoner)}
 
+        {JSON.stringify(infoSummoner,null,'\t')}
+        <SummonerCard infoSummoner={infoSummoner}/>
         </Container>
 
     </>
