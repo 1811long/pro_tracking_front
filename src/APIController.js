@@ -27,12 +27,24 @@ const APIController = (function(){
         }
     }
 
+    const _getHistoryMatchesBySummonerName = async(name) => {
+       try{
+          const response = await api.get(`/summoner/${name}/matches`)
+          return response.data
+       }catch (err){
+        console.log(err)
+     }
+    }
+
     return{
         getAllChampions(){
             return _getAllChampions()
         },
         getSummonerByName(name){
             return _getSummonerByName(name)
+        },
+        getHistoryMatchesBySummonerName(name){
+            return _getHistoryMatchesBySummonerName(name)
         }
     }
 

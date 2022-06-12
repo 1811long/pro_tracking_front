@@ -59,7 +59,8 @@ export default function SummonerCard({ infoSummoner }) {
     return (
         <div>
             {infoSummoner &&
-                <Grid container direction="row" className={classes.root} spacing={5} >
+                <Grid container direction="row" className={classes.root} spacing={5} 
+                >
                     <Grid item xs={2} >
                         <Grid container item xs={10} className={classes.portrait} >
 
@@ -78,7 +79,14 @@ export default function SummonerCard({ infoSummoner }) {
                         </Grid>
                     </Grid>
 
-                    <Grid container direction="column" spacing={3} item xs={10}>
+                    <Grid
+                        container
+                        direction="column"
+                        spacing={3}
+                        item
+                        xs={10}
+                        alignContent="center"
+                    >
                         <Grid
                             item xs={3}
                         >
@@ -89,7 +97,9 @@ export default function SummonerCard({ infoSummoner }) {
                         >
                             Summoner Name : {`${infoSummoner.name}`}
                             <br></br>
+                            <br></br>
                             Level : {`${infoSummoner.level}`}
+                            <br></br>
                             <br></br>
                             Rank : {`${infoSummoner.rank}`}
                         </Grid>

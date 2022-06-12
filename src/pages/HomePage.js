@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import SummonerCard from '../components/SummonerCard';
-
+import HistoryCard from '../components/HistoryCard';
 import APIController from '../APIController';
 
 
@@ -49,8 +49,9 @@ export default function HomePage() {
                 fullWidth
             />
 
-        {JSON.stringify(infoSummoner,null,'\t')}
-        <SummonerCard infoSummoner={infoSummoner}/>
+            {/* {JSON.stringify(infoSummoner,null,'\t')} */}
+            <SummonerCard infoSummoner={infoSummoner}/>
+            <HistoryCard infoSummoner={infoSummoner}/>
         </Container>
 
     </>

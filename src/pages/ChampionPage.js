@@ -9,23 +9,8 @@ const URL_IMAGE = "http://ddragon.leagueoflegends.com/cdn/12.11.1/img/champion/"
 
 export default function ChampionPage() {
   const [champions, setChampions] = useState([]);
-
+  
   useEffect(() => {
-    // const fetchChampions = async () => {
-    //   try{
-    //     const response = await api.get('/champions');
-    //     console.log(response)
-    //     setChampions(response.data['result']);
-    //   }catch (err){
-    //     if (err.response){
-    //       console.log(err.response.data);
-    //       console.log(err.response.status);
-    //       console.log(err.response.headers);
-    //     }else{
-    //       console.log(`Error: ${err.message}`);
-    //     }
-    //   }   
-    // }
    APIController
       .getAllChampions()
       .then((listChampions) => setChampions(listChampions))
@@ -54,7 +39,6 @@ export default function ChampionPage() {
                   </div>
               ))}
           </div>
-          
         </div>
         </Container>
       </>
