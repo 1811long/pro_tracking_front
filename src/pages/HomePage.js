@@ -7,53 +7,74 @@ import { useEffect } from 'react';
 import SummonerCard from '../components/SummonerCard';
 import HistoryCard from '../components/HistoryCard';
 import APIController from '../APIController';
-
+import Button from '@mui/material/Button';
 
 export default function HomePage() {
-  const [nameSummoner,setNameSummoner] = useState('')
-  const [infoSummoner, setInfoSummoner] = useState()
+    const [nameSummoner, setNameSummoner] = useState('')
+    const [infoSummoner, setInfoSummoner] = useState()
 
-  useEffect(() =>{
-    if (nameSummoner == '') return
-    APIController
+    // useEffect(() => {
+    //     if (nameSummoner == '') return
+    //     APIController
+    //         .getSummonerByName(nameSummoner)
+    //         .then((res) => {
+    //             setInfoSummoner(res)
+    //         })
+    // }, [nameSummoner])
+
+    function onNameSummonerChange(e) {
+        setNameSummoner(e.target.value)
+    }
+
+    function onSubmit(e) {
+        setInfoSummoner(null)
+        APIController
             .getSummonerByName(nameSummoner)
-            .then((res) => {
+            .then((res) =>
                 setInfoSummoner(res)
-            })
-  }, [nameSummoner])
+            )
+    }
 
-  function onNameSummonerChange(e) {
-    setNameSummoner(e.target.value)
-  }
-
-  return (
-    <>  
-        <NavBar/>
-        <Container  
-            maxWidth="md"
-            style={{
-                marginTop:""
-            }}
-        >
-            <h1
-                style={{textAlign:'center'}}
+    return (
+        <>
+            <NavBar />
+            <Container
+                maxWidth="md"
+                style={{
+                    marginTop: ""
+                }}
             >
-                Entrer le nom de l'invocateur
-            </h1>
-            <TextField
-                id="outlined-basic"
-                value={nameSummoner}
-                onChange={onNameSummonerChange}
-                label="Entrer le nom de l'invocateur"
-                variant="outlined" 
-                fullWidth
-            />
+                <h1
+                    style={{ textAlign: 'center' }}
+                >
+                    Entrer le nom de l'invocateur
+                </h1>
+                <TextField
+                    id="outlined-basic"
+                    value={nameSummoner}
+                    onChange={onNameSummonerChange}
+                    label="Entrer le nom de l'invocateur"
+                    variant="outlined"
+                    fullWidth
+                />
+                <br></br>
+                <br></br>
+                <div
+                    style={{
+                        textAlign: "center"
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        onClick={onSubmit}
+                    >
+                        Submit
+                    </Button>
+                </div>
+                <SummonerCard infoSummoner={infoSummoner} />
+                <HistoryCard infoSummoner={infoSummoner} />
+            </Container>
 
-            {/* {JSON.stringify(infoSummoner,null,'\t')} */}
-            <SummonerCard infoSummoner={infoSummoner}/>
-            <HistoryCard infoSummoner={infoSummoner}/>
-        </Container>
-
-    </>
-  )
+        </>
+    )
 }

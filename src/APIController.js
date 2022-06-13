@@ -21,7 +21,8 @@ const APIController = (function(){
     const _getSummonerByName = async (name) =>{
         try{
             const response = await api.get(`/summoner/${name}`)
-            return response.data.result
+            const data = response.data
+            return data
         }catch (err){
            console.log(err)
         }
@@ -30,7 +31,8 @@ const APIController = (function(){
     const _getHistoryMatchesBySummonerName = async(name) => {
        try{
           const response = await api.get(`/summoner/${name}/matches`)
-          return response.data
+          const data = response.data
+          return data
        }catch (err){
         console.log(err)
      }

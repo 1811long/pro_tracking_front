@@ -51,15 +51,11 @@ export default function NavBar() {
             </Link>
 
             <Link to="/about" className={classes.link}>
-              About
+              Champions on Trending
             </Link>
 
             <Link to="/contact" className={classes.link}>
-              Contact
-            </Link>
-
-            <Link to="/faq" className={classes.link}>
-              FAQ
+              Team Composition
             </Link>
           </div>
          

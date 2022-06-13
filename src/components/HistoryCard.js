@@ -19,6 +19,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
+import { border } from '@mui/system';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -111,10 +112,16 @@ export default function HistoryCard({ infoSummoner }) {
   const [matchesInfo, setMatchesInfo] = useState([])
 
   useEffect(() => {
-    if (!infoSummoner) return
+    
+    if (!infoSummoner){
+      setMatchesInfo([])
+      return
+    }
+
     APIController
       .getHistoryMatchesBySummonerName(infoSummoner.name)
       .then((data) => setMatchesInfo(data))
+
   }, [infoSummoner])
 
   function getImageURL(nameChampion) {
@@ -123,7 +130,13 @@ export default function HistoryCard({ infoSummoner }) {
 
   return (
     <div className={classes.root}>
-      {matchesInfo.length > 0 && matchesInfo.map((match, index) => {
+      <h2 style={{
+        textAlign:'center',
+        borderTop:'1px solid black'
+      }}>
+        Match History 
+      </h2>
+      {matchesInfo.length > 0 && infoSummoner != null && matchesInfo.map((match, index) => {
         return (
           <Paper
             variant="outlined"
@@ -247,9 +260,7 @@ export default function HistoryCard({ infoSummoner }) {
 }
 
 function returnMinSeconDate(timestamp) {
-  console.log(timestamp)
   var time = new Date(timestamp * 1000);
-  console.log(time)
   return time.getMinutes() + "m " + time.getSeconds() + "s";
 }
 
