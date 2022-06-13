@@ -12,6 +12,7 @@ import {
   Avatar,
   Box,
   Chip,
+  CircularProgress,
   Divider,
   Grid,
   GridList,
@@ -107,21 +108,22 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export default function HistoryCard({ infoSummoner }) {
+export default function HistoryCard({ infoSummoner, loader, setLoader }) {
   const classes = useStyles();
   const [matchesInfo, setMatchesInfo] = useState([])
 
   useEffect(() => {
-    
-    if (!infoSummoner){
+    console.log(loader)
+    if (!infoSummoner) {
       setMatchesInfo([])
       return
     }
-
     APIController
       .getHistoryMatchesBySummonerName(infoSummoner.name)
-      .then((data) => setMatchesInfo(data))
-
+      .then((data) => {
+        setLoader(false)
+        setMatchesInfo(data)
+      })
   }, [infoSummoner])
 
   function getImageURL(nameChampion) {
@@ -131,12 +133,13 @@ export default function HistoryCard({ infoSummoner }) {
   return (
     <div className={classes.root}>
       <h2 style={{
-        textAlign:'center',
-        borderTop:'1px solid black'
+        textAlign: 'center',
+        paddingTop: '10px',
+        borderTop: '1px solid black'
       }}>
-        Match History 
+        Match History - 10 recent matches
       </h2>
-      {matchesInfo.length > 0 && infoSummoner != null && matchesInfo.map((match, index) => {
+      {matchesInfo && matchesInfo.length > 0 && infoSummoner != null ? matchesInfo.map((match, index) => {
         return (
           <Paper
             variant="outlined"
@@ -150,111 +153,119 @@ export default function HistoryCard({ infoSummoner }) {
               alignContent="center"
               alignItems="center"
             >
-                <Grid 
-                 item 
-                 alignItems='center'
-                 alignContent='center'
-                 xs={1}
-                 style={{
-                  textAlign:"center"
-                 }}
-                 >
-                  <Avatar 
-                      src={getImageURL(match.championName)}
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        margin: '0 auto'
-                      }}
-                    />
-                   <strong> {match.championName}</strong>
-                </Grid>
-                <Grid
-                  item
-                  xs={2}
-                >
-                  Kill : {match.kills}
-                  <br></br>
-                  Deaths : {match.deaths}
-                  <br></br>
-                  Assist : {match.assits}
-                  <br></br>
-                  Vision Score: {match.visionScore}
-                </Grid>
-                <Grid
-                  item
-                  xs={2}
-                >
-                 {match.isWin ? "Victory" : "Defeat"}
-                </Grid>
-                <Grid
-                  item
-                  container
-                  direction="column"
-                  xs={3}
-                >
-                   <Grid 
-                    item
-                    xs={6}
-                  >
-                    {"Since"}
-                  </Grid>
-                  <Grid 
-                    item
-                    xs={6}
-                    md='auto'
-                  >
-                    {timeDifference(Date.now(), new Date(match.gameCreation))}
-                  </Grid>
-                </Grid>
-                <Grid
-                  item
-                  container
-                  direction="column"
-                  xs={2}
-                >
-                  <Grid 
-                    item
-                    xs={6}
-                    md="auto"
-                  >
-                    {"Time Length"}
-                  </Grid>
-                  <Grid 
-                    item
-                    xs={6}
-                  >
-                    {returnMinSeconDate(match.gameLength)}
-                  </Grid>
-                </Grid>
-                <Grid
-                  item
-                  container
-                  direction="column"
-                  xs={2}
-                  alignContent="center"
+              <Grid
+                item
+                alignItems='center'
+                alignContent='center'
+                xs={1}
+                style={{
+                  textAlign: "center"
+                }}
+              >
+                <Avatar
+                  src={getImageURL(match.championName)}
                   style={{
-                    textAlign:"center"
+                    width: '50px',
+                    height: '50px',
+                    margin: '0 auto'
                   }}
+                />
+                <strong> {match.championName}</strong>
+              </Grid>
+              <Grid
+                item
+                xs={2}
+              >
+                Kill : {match.kills}
+                <br></br>
+                Deaths : {match.deaths}
+                <br></br>
+                Assist : {match.assits}
+                <br></br>
+                Vision Score: {match.visionScore}
+              </Grid>
+              <Grid
+                item
+                xs={2}
+              >
+                {match.isWin ? "Victory" : "Defeat"}
+              </Grid>
+              <Grid
+                item
+                container
+                direction="column"
+                xs={3}
+              >
+                <Grid
+                  item
+                  xs={6}
                 >
-                    <Grid 
-                    item
-                    xs={6}
-                    md="auto"
-                  >
-                    {"Level"}
-                  </Grid>
-                  <Grid 
-                    item
-                    xs={6}
-                  >
-                    {match.championLevel}
-                  </Grid>
+                  {"Since"}
                 </Grid>
+                <Grid
+                  item
+                  xs={6}
+                  md='auto'
+                >
+                  {timeDifference(Date.now(), new Date(match.gameCreation))}
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                container
+                direction="column"
+                xs={2}
+              >
+                <Grid
+                  item
+                  xs={6}
+                  md="auto"
+                >
+                  {"Time Length"}
+                </Grid>
+                <Grid
+                  item
+                  xs={6}
+                >
+                  {returnMinSeconDate(match.gameLength)}
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                container
+                direction="column"
+                xs={2}
+                alignContent="center"
+                style={{
+                  textAlign: "center"
+                }}
+              >
+                <Grid
+                  item
+                  xs={6}
+                  md="auto"
+                >
+                  {"Level"}
+                </Grid>
+                <Grid
+                  item
+                  xs={6}
+                >
+                  {match.championLevel}
+                </Grid>
+              </Grid>
             </Grid>
           </Paper>
         );
-      })}
+      })
+        :
+        <div style={{
+          textAlign:"center",
+          marginTop:"200px"
+        }}>
+          {loader ? <CircularProgress /> : " "}
+        </div>
+      }
     </div >
   )
 }

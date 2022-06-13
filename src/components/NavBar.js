@@ -7,6 +7,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -44,6 +45,10 @@ export default function NavBar() {
 
             <Link to="/" className={classes.link}>
               Home
+            </Link>
+
+            <Link to="/summoner" className={classes.link}>
+              Summoner
             </Link>
 
             <Link to="/champions" className={classes.link}>

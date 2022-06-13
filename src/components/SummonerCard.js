@@ -61,9 +61,9 @@ export default function SummonerCard({ infoSummoner }) {
             {infoSummoner &&
                 <Grid container direction="row" className={classes.root} spacing={5} 
                 >
-                    <Grid item xs={2} >
+                    <Grid item xs={2}>
                         <Grid container item xs={10} className={classes.portrait} >
-
+                            
                             <img
                                 className={classes.image}
                                 src={infoSummoner ? url_icon + infoSummoner.icon_id + ".png" : null}
@@ -75,24 +75,25 @@ export default function SummonerCard({ infoSummoner }) {
                                     {infoSummoner ? infoSummoner.level : null}
                                 </Typography>
                             </Grid>
-
                         </Grid>
                     </Grid>
+                    <Grid
+                        item
+                        xs={5}
+                    >
 
+                    </Grid>
                     <Grid
                         container
-                        direction="column"
+                        direction="row"
                         spacing={3}
                         item
-                        xs={10}
+                        xs={5}
                         alignContent="center"
                     >
                         <Grid
-                            item xs={3}
-                        >
-                        </Grid>
-                        <Grid
-                            item xs={5}
+                            item 
+                            md="auto"
                             className={classes.name}
                         >
                             Summoner Name : {`${infoSummoner.name}`}
